@@ -1,3 +1,5 @@
+'use strict';
+
 const createTripInfo = () => {
   return (
     `<div class="trip-info__main">
