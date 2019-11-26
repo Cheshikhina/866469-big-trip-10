@@ -152,7 +152,7 @@ const createTripForm = () => {
         <label class="event__label  event__type-output" for="event-destination-1">
           Sightseeing at
         </label>
-        <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="" list="destination-list-1">
+        <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="Geneva" list="destination-list-1">
         <datalist id="destination-list-1">
           <option value="Amsterdam"></option>
           <option value="Geneva"></option>
@@ -184,11 +184,79 @@ const createTripForm = () => {
       <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
       <button class="event__reset-btn" type="reset">Cancel</button>
     </header>
+    <section class="event__details">
+
+      <section class="event__section  event__section--offers">
+        <h3 class="event__section-title  event__section-title--offers">Offers</h3>
+
+        <div class="event__available-offers">
+          <div class="event__offer-selector">
+            <input class="event__offer-checkbox  visually-hidden" id="event-offer-luggage-1" type="checkbox" name="event-offer-luggage" checked>
+            <label class="event__offer-label" for="event-offer-luggage-1">
+              <span class="event__offer-title">Add luggage</span>
+              &plus;
+              &euro;&nbsp;<span class="event__offer-price">30</span>
+            </label>
+          </div>
+
+          <div class="event__offer-selector">
+            <input class="event__offer-checkbox  visually-hidden" id="event-offer-comfort-1" type="checkbox" name="event-offer-comfort" checked>
+            <label class="event__offer-label" for="event-offer-comfort-1">
+              <span class="event__offer-title">Switch to comfort class</span>
+              &plus;
+              &euro;&nbsp;<span class="event__offer-price">100</span>
+            </label>
+          </div>
+
+          <div class="event__offer-selector">
+            <input class="event__offer-checkbox  visually-hidden" id="event-offer-meal-1" type="checkbox" name="event-offer-meal">
+            <label class="event__offer-label" for="event-offer-meal-1">
+              <span class="event__offer-title">Add meal</span>
+              &plus;
+              &euro;&nbsp;<span class="event__offer-price">15</span>
+            </label>
+          </div>
+
+          <div class="event__offer-selector">
+            <input class="event__offer-checkbox  visually-hidden" id="event-offer-seats-1" type="checkbox" name="event-offer-seats">
+            <label class="event__offer-label" for="event-offer-seats-1">
+              <span class="event__offer-title">Choose seats</span>
+              &plus;
+              &euro;&nbsp;<span class="event__offer-price">5</span>
+            </label>
+          </div>
+
+          <div class="event__offer-selector">
+            <input class="event__offer-checkbox  visually-hidden" id="event-offer-train-1" type="checkbox" name="event-offer-train">
+            <label class="event__offer-label" for="event-offer-train-1">
+              <span class="event__offer-title">Travel by train</span>
+              &plus;
+              &euro;&nbsp;<span class="event__offer-price">40</span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section class="event__section  event__section--destination">
+        <h3 class="event__section-title  event__section-title--destination">Destination</h3>
+        <p class="event__destination-description">Geneva is a city in Switzerland that lies at the southern tip of expansive Lac Léman (Lake Geneva). Surrounded by the Alps and Jura mountains, the city has views of dramatic Mont Blanc.</p>
+
+        <div class="event__photos-container">
+          <div class="event__photos-tape">
+            <img class="event__photo" src="img/photos/1.jpg" alt="Event photo">
+            <img class="event__photo" src="img/photos/2.jpg" alt="Event photo">
+            <img class="event__photo" src="img/photos/3.jpg" alt="Event photo">
+            <img class="event__photo" src="img/photos/4.jpg" alt="Event photo">
+            <img class="event__photo" src="img/photos/5.jpg" alt="Event photo">
+          </div>
+        </div>
+      </section>
+    </section>
   </form>`
   );
 };
 
-const createTripContainerCard = () => {
+const createTripCard = () => {
   return (
     `<ul class="trip-days">
     <li class="trip-days__item  day">
@@ -197,16 +265,8 @@ const createTripContainerCard = () => {
         <time class="day__date" datetime="2019-03-18">MAR 18</time>
       </div>
       <ul class="trip-events__list">
-      </ul>
-      </li>
-      </ul>`
-  );
-};
-
-const createTripCard = () => {
-  return (
-    `<li class="trip-events__item">
-    <div class="event">
+      <li class="trip-events__item">
+      <div class="event">
       <div class="event__type">
         <img class="event__type-icon" width="42" height="42" src="img/icons/drive.png" alt="Event type icon">
       </div>
@@ -228,13 +288,13 @@ const createTripCard = () => {
       <button class="event__rollup-btn" type="button">
         <span class="visually-hidden">Open event</span>
       </button>
-    </div>
-  </li>`
+      </div>
+      </li>
+      </ul>
+      </li>
+      </ul>`
   );
 };
-
-const CARD_COUNT = 3;
-
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
@@ -260,12 +320,7 @@ render(containerTripSort, createTripSort(), `afterEnd`);
 const containerTripForm = document.querySelector(`.trip-sort`);
 render(containerTripForm, createTripForm(), `afterEnd`);
 
-// Контейнер для карточек
-const boxTripContainerCard = document.querySelector(`.event`);
-render(boxTripContainerCard, createTripContainerCard(), `afterEnd`);
-
+const CARD_COUNT = 3;
 // Карточки
-const containerTripCard = document.querySelector(`.trip-events__list`);
-for (let i = 0; i < CARD_COUNT; i++) {
-  render(containerTripCard, createTripCard(), `beforeEnd`);
-}
+const containerTripCard = document.querySelector(`.event`);
+render(containerTripCard, Array(CARD_COUNT).fill(createTripCard()).join(`\n`), `afterEnd`);
