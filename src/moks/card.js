@@ -6,5 +6,3 @@ import {MONTHS} from '../const.js';
 import {getObjectCard} from '../utils.js';
 
 export let newDataCard = getObjectCard(EVENT_TYPES, DESTINATION, OPTIONS, MONTHS, DESCRIPTON);
-
-console.log(newDataCard);
